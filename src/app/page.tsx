@@ -19,32 +19,124 @@ import {
   GraduationCap,
   Phone,
   Award,
+  FileText,
 } from "lucide-react";
 
-const projects = [
+type Category = "web" | "mobile" | "tv" | "ai";
+
+type Project = {
+  title: string;
+  description: string;
+  tags: string[];
+  categories: Category[];
+  media: string;            
+  demo?: string;
+  deploy?: string;
+  repo?: string;
+  doc?: string;
+};
+
+const projects: Project[] = [
   {
-    title: "Mascoteando — Social para mascotas",
-    description:
-      "App híbrida (web + móvil) con Expo Router, Firebase y Supabase. Mapa de espacios verdes, alertas de mascotas perdidas, feed social y recomendaciones.",
-    tags: ["Expo", "React Native", "Firebase", "Supabase"],
-    link: "https://tusitio.com/mascoteando",
-    repo: "https://github.com/TU-USUARIO/mascoteando",
+    title: "Mascoteando — Plataforma social para dueños de mascotas",
+    description: "App híbrida (Expo) con mapa interactivo, alertas en tiempo real y feed social.",
+    tags: ["Expo", "React Native", "Firebase", "Embeddings", "Google Maps API"],
+    categories: ["mobile", "web", "ai"],  
+    media: "/mascoteando.gif",        
+    demo: "https://app-mascoteando.vercel.app",
+    repo: "https://github.com/lucasconfalonieri/app-proyecto-final",
+    doc:  "https://docs.google.com/document/d/1rcLdqpwaDHkSJX4TS1PLAWP9MHPisbgaev53Q6NbxP8/edit?usp=sharing", 
   },
   {
     title: "Digital Signage Tizen",
-    description:
-      "Plataforma de gestión de slideshows para TVs Tizen: detección de dispositivos, playlists, editor de presentaciones, despliegue desde la nube.",
-    tags: [".NET", "React", "Tizen", "AWS"],
-    link: "https://tusitio.com/signage",
-    repo: "https://github.com/TU-USUARIO/signage",
+    description: "Gestión de slideshows para TVs Tizen: detección, playlists, editor, despliegue.",
+    tags: [".NET", "React", "Tizen"],
+    categories: ["tv", "web"],
+    media: "/TVCast.gif",
+    doc:  "https://docs.google.com/document/d/1k5GNt04K95fv3lc4VgcEB1efevX3CLAQ/edit?usp=sharing&ouid=102317204902453230079&rtpof=true&sd=true",
   },
   {
     title: "CNN Frutas/Verduras",
-    description:
-      "Clasificador con TensorFlow/Keras, dataset en S3 y panel Streamlit para pruebas y visualización de métricas.",
-    tags: ["TensorFlow", "Keras", "AWS S3", "Streamlit"],
-    link: "https://tusitio.com/cnn",
-    repo: "https://github.com/TU-USUARIO/cnn-frutas",
+    description: "Clasificador con TensorFlow/Keras + panel Streamlit para métricas.",
+    tags: ["TensorFlow", "Keras", "AWS S3", "AWS EC2" ,"Streamlit", "Terraform"],
+    categories: ["ai"],
+    media: "/ClasiFrutVerd.gif",            
+    deploy: "https://github.com/lucasconfalonieri/Terraform-AWS-CNN",
+    repo: "https://github.com/lucasconfalonieri/Frut-Verd-CNN",
+    doc:  "https://docs.google.com/document/d/1IJ4iTGyfCEUvp-PzusfQkdrkMduNJEFFzdRm8XgCHyc/edit?usp=sharing",
+  },
+  {
+    title: "Audiestimulos - Rehabilitación auditiva de pacientes con implantes cocleares",
+    description: "App web que consta de un programa de rehabilitacion de 5 etapas incluyendo imagenes, sonidos y test de evolución para el paciente.",
+    tags: ["Svelte", "Node.js", "MySQL", "Vercel"],
+    categories: ["web"],
+    media: "Audiestimulos.gif",
+    demo: "https://herramienta-audiestimulos.vercel.app/",
+    repo: "https://github.com/lucasconfalonieri/Audiestimulos",
+    doc:  "https://docs.google.com/document/d/1wvyCRsayDzSJ7Yoa8TIiliox70YUsBeIc-QfdCIsLMg/edit?usp=sharing",
+  },
+    {
+    title: "Mantina",
+    description: "Plataforma web para gestión y distribución de material de estudio para alumnos de pilotaje. Incluye un backoffice para administrar archivos PDF y usuarios.",
+    tags: ["React", "Node.js", "MySQL", "cPanel", "VPS Linux (AlmaLinux)"],
+    categories: ["web"],
+    media: "Mantina.gif",
+    demo: "https://mantina.com",
+    repo: "https://github.com/lucasconfalonieri/Mantina",
+  },
+  {
+    title: "NeuroNEApp",
+    description: "Landing estática Next.js + Tailwind optimizada con Lighthouse 95+.",
+    tags: ["Next.js", "Tailwind", "SEO"],
+    categories: ["web"],
+    media: "/projects/landing.jpg",
+    demo: "https://tusitio.com/landing",
+    repo: "https://github.com/TU-USUARIO/landing",
+  },
+    {
+    title: "Tecnicar",
+    description: "Landing estática Next.js + Tailwind optimizada con Lighthouse 95+.",
+    tags: ["Next.js", "Tailwind", "SEO"],
+    categories: ["web"],
+    media: "/projects/landing.jpg",
+    demo: "https://tusitio.com/landing",
+    repo: "https://github.com/TU-USUARIO/landing",
+  },
+    {
+    title: "Landing Psicologa",
+    description: "Landing estática Next.js + Tailwind optimizada con Lighthouse 95+.",
+    tags: ["Next.js", "Tailwind", "SEO"],
+    categories: ["web"],
+    media: "/projects/landing.jpg",
+    demo: "https://tusitio.com/landing",
+    repo: "https://github.com/TU-USUARIO/landing",
+  },
+    {
+    title: "QA Automation - InboxVip",
+    description: "Landing estática Next.js + Tailwind optimizada con Lighthouse 95+.",
+    tags: ["Next.js", "Tailwind", "SEO"],
+    categories: ["web"],
+    media: "/projects/landing.jpg",
+    demo: "https://tusitio.com/landing",
+    repo: "https://github.com/TU-USUARIO/landing",
+  },
+    {
+    title: "Sistema Estación de servicio",
+    description: "Landing estática Next.js + Tailwind optimizada con Lighthouse 95+.",
+    tags: ["Next.js", "Tailwind", "SEO"],
+    categories: ["web"],
+    media: "/projects/landing.jpg",
+    demo: "https://tusitio.com/landing",
+    repo: "https://github.com/TU-USUARIO/landing",
+  },
+    {
+    title: "Este Portfolio",
+    description: "Landing estática Next.js + Tailwind optimizada con Lighthouse 95+.",
+    tags: ["Next.js", "Tailwind", "SEO"],
+    categories: ["web"],
+    media: "/projects/landing.jpg",
+    demo: "https://tusitio.com/landing",
+    repo: "https://github.com/TU-USUARIO/landing",
   },
 ];
 
@@ -128,6 +220,9 @@ export default function Portfolio() {
 
   const { scrollY } = useScroll();
   const yBg = useTransform(scrollY, [0, 600], [0, 120]);
+  const [activeFilter, setActiveFilter] =
+  useState<"all" | Category>("all");
+
 
   return (
     <div className="min-h-screen text-slate-900 scroll-smooth bg-white">
@@ -143,7 +238,7 @@ export default function Portfolio() {
           <nav className={`hidden sm:flex gap-5 text-sm ${headerText}`}>
             <a href="#home" className="hover:underline">Home</a>
             <a href="#about" className="hover:underline">About</a>
-            <a href="#skills" className="hover:underline">Skills</a>
+            <a href="#knowledge" className="hover:underline">Knowledge</a>
             <a href="#projects" className="hover:underline">Projects</a>
             <a href="#experiences" className="hover:underline">Experiences</a>
             <a href="#education" className="hover:underline">Education</a>
@@ -190,7 +285,7 @@ export default function Portfolio() {
                 <h1 className="text-3xl sm:text-4xl md:text-5xl font-bold leading-tight mt-2 text-white">
                   Lucas Confalonieri
                 </h1>
-                <p className="mt-2 text-lg text-white/90">Full‑Stack & Data‑Driven Products</p>
+                <p className="mt-2 text-lg text-white/90">Full-Stack Engineer · Testing & BDD</p>
                 <div className="mt-6 flex flex-wrap gap-3">
                   <a href="#projects" className="inline-flex items-center gap-2 rounded-2xl border border-white/70 text-white px-4 py-2 bg-white/5 hover:bg-white/10">
                     <Code2 className="h-4 w-4" /> Ver proyectos
@@ -231,13 +326,13 @@ export default function Portfolio() {
           <div className="mt-5 flex flex-wrap items-center gap-4 text-sm text-slate-700">
             <span className="inline-flex items-center gap-2"><MapPin className="h-4 w-4" /> Corrientes, AR</span>
             <a className="inline-flex items-center gap-2 " href="mailto:lucasconfa7.lc@gmail.com"><Mail className="h-4 w-4" /> lucasconfa7.lc@gmail.com</a>
-            <a className="inline-flex items-center gap-2" href="https://github.com/lucasconfa7"><Github className="h-4 w-4" />lucasconfalonieri</a>
+            <a className="inline-flex items-center gap-2" href="https://github.com/lucasconfalonieri"><Github className="h-4 w-4" />lucasconfalonieri</a>
             <a className="inline-flex items-center gap-2" href="https://www.linkedin.com/in/lucas-confalonieri/"><Linkedin className="h-4 w-4" />lucas-confalonieri</a>
           </div>
         </div>
       </Section>
 
-<Section id="skills" title="Skills" variant="b">
+<Section id="knowledge" title="Knowledge" variant="b">
   <div className="rounded-2xl border bg-white p-6 shadow-sm">
     <ul className="grid grid-cols-3 sm:grid-cols-4 md:grid-cols-6 gap-6 place-items-center">
       {skillIcons.map(({ label, Icon }) => (
@@ -255,38 +350,144 @@ export default function Portfolio() {
 </Section>
 
 
-      <Section id="projects" title="Projects" variant="a">
-        <div className="grid sm:grid-cols-2 gap-6">
-          {projects.map((p) => (
-            <motion.article
-              key={p.title}
-              initial={{ opacity: 0, y: 12 }}
-              whileInView={{ opacity: 1, y: 0 }}
-              viewport={{ once: true }}
-              transition={{ duration: 0.35 }}
-              className="rounded-2xl border bg-white p-6 shadow-sm flex flex-col"
-            >
-              <div className="flex-1">
-                <h3 className="text-lg font-semibold">{p.title}</h3>
-                <p className="mt-2 text-slate-600">{p.description}</p>
-                <div className="mt-3 flex flex-wrap gap-2">
-                  {p.tags.map((t) => (
-                    <span key={t} className="text-xs rounded-full border px-2 py-1">{t}</span>
-                  ))}
-                </div>
-              </div>
-              <div className="mt-4 flex gap-3">
-                <a href={p.link} target="_blank" rel="noreferrer" className="inline-flex items-center gap-1 text-sm px-3 py-2 rounded-xl border hover:bg-slate-50">
+<Section id="projects" title="Projects" variant="a">
+  {/* Tabs */}
+  <div className="mb-6 flex flex-wrap gap-2">
+    {[
+      { key: "all", label: "All" },
+      { key: "web", label: "Web" },
+      { key: "mobile", label: "Mobile" },
+      { key: "tv", label: "TV" },
+      { key: "ai", label: "AI / Machine Learning" },
+    ].map((f) => (
+      <button
+        key={f.key}
+        onClick={() => setActiveFilter(f.key as any)}
+        className={`px-4 py-2 rounded-full border text-sm transition
+          ${activeFilter === f.key
+            ? "bg-slate-900 text-white border-slate-900"
+            : "bg-white text-slate-700 border-slate-200 hover:bg-slate-50"}`}
+      >
+        {f.label}
+      </button>
+    ))}
+  </div>
+
+  {/* Grid */}
+  <div className="grid gap-6 sm:grid-cols-2 lg:grid-cols-3">
+    {(activeFilter === "all"
+      ? projects
+      : projects.filter((p) => p.categories.includes(activeFilter))
+    ).map((p) => {
+      const isVideo = /\.mp4$|\.webm$/i.test(p.media);
+      return (
+        <motion.article
+          key={p.title}
+          initial={{ opacity: 0, y: 12 }}
+          whileInView={{ opacity: 1, y: 0 }}
+          viewport={{ once: true }}
+          transition={{ duration: 0.35 }}
+          className="group rounded-2xl border bg-white overflow-hidden shadow-sm flex flex-col"
+        >
+          {/* Media: GIF/JPG/PNG via <img> o MP4/WEBM via <video> */}
+          <div className="relative aspect-[16/9] overflow-hidden">
+            {isVideo ? (
+              <video
+                src={p.media}
+                className="h-full w-full object-cover"
+                autoPlay
+                muted
+                loop
+                playsInline
+              />
+            ) : (
+              <img
+                src={p.media}
+                alt={p.title}
+                className="h-full w-full object-cover transition-transform duration-300 group-hover:scale-105"
+                loading="lazy"
+              />
+            )}
+            {/* Badges de categorías (varias) */}
+            <div className="absolute left-3 top-3 flex flex-wrap gap-2">
+              {p.categories.map((c) => (
+                <span
+                  key={c}
+                  className="text-[11px] font-medium rounded-full px-2.5 py-1 bg-black/70 text-white uppercase tracking-wide"
+                >
+                  {c}
+                </span>
+              ))}
+            </div>
+          </div>
+
+          {/* Texto */}
+          <div className="p-5 flex-1 flex flex-col">
+            <h3 className="text-base font-semibold">{p.title}</h3>
+            <p className="mt-2 text-sm text-slate-600 flex-1">{p.description}</p>
+            <div className="mt-3 flex flex-wrap gap-2">
+              {p.tags.map((t) => (
+                <span key={t} className="text-[11px] rounded-full border px-2 py-1 text-slate-700">
+                  {t}
+                </span>
+              ))}
+            </div>
+
+            {/* Botones */}
+            <div className="mt-4 flex flex-wrap gap-3">
+              {p.demo && (
+                <a
+                  href={p.demo}
+                  target="_blank"
+                  rel="noreferrer"
+                  className="inline-flex items-center gap-1 text-sm px-3 py-2 rounded-xl
+                             bg-indigo-600 text-white hover:bg-indigo-700"
+                >
                   <ExternalLink className="h-4 w-4" /> Demo
                 </a>
-                <a href={p.repo} target="_blank" rel="noreferrer" className="inline-flex items-center gap-1 text-sm px-3 py-2 rounded-xl border hover:bg-slate-50">
+              )}
+              {p.deploy && (
+                <a
+                  href={p.deploy}
+                  target="_blank"
+                  rel="noreferrer"
+                  className="inline-flex items-center gap-1 text-sm px-3 py-2 rounded-xl
+                             bg-slate-900 text-white hover:bg-slate-800"
+                >
+                  <Code2 className="h-4 w-4" /> Deploy
+                </a>
+              )}
+              {p.repo && (
+                <a
+                  href={p.repo}
+                  target="_blank"
+                  rel="noreferrer"
+                  className="inline-flex items-center gap-1 text-sm px-3 py-2 rounded-xl
+                             bg-slate-900 text-white hover:bg-slate-800"
+                >
                   <Code2 className="h-4 w-4" /> Código
                 </a>
-              </div>
-            </motion.article>
-          ))}
-        </div>
-      </Section>
+              )}
+              {p.doc && (
+                <a
+                  href={p.doc}
+                  target="_blank"
+                  rel="noreferrer"
+                  className="inline-flex items-center gap-1 text-sm px-3 py-2 rounded-xl
+                             bg-emerald-600 text-white hover:bg-emerald-700"
+                >
+                  <FileText className="h-4 w-4" /> Documento
+                </a>
+              )}
+            </div>
+          </div>
+        </motion.article>
+      );
+    })}
+  </div>
+</Section>
+
+
 
       <Section id="experiences" title="Experiences" variant="b">
         <div className="space-y-4">
