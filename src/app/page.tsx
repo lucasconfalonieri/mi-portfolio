@@ -20,9 +20,10 @@ import {
   Phone,
   Award,
   FileText,
+  PlayCircle,
 } from "lucide-react";
 
-type Category = "web" | "mobile" | "tv" | "ai";
+type Category = "web" | "mobile" | "tv" | "ai" | "QA";
 
 type Project = {
   title: string;
@@ -34,6 +35,7 @@ type Project = {
   deploy?: string;
   repo?: string;
   doc?: string;
+  content?: string;
 };
 
 const projects: Project[] = [
@@ -86,21 +88,21 @@ const projects: Project[] = [
   },
   {
     title: "NeuroNEApp",
-    description: "Landing estática Next.js + Tailwind optimizada con Lighthouse 95+.",
-    tags: ["Next.js", "Tailwind", "SEO"],
+    description: "PWA de ejercicios cognitivos para centro neurologico, con el fin de trabajar habilidades mentales mediante juegos interactivos.",
+    tags: ["Next.js", "Supabase", "PostgreSQL", "Cloudfare Pages", "Prisma"],
     categories: ["web"],
-    media: "/projects/landing.jpg",
-    demo: "https://tusitio.com/landing",
-    repo: "https://github.com/TU-USUARIO/landing",
+    media: "NeuroNEA.gif",
   },
     {
     title: "Tecnicar",
-    description: "Landing estática Next.js + Tailwind optimizada con Lighthouse 95+.",
-    tags: ["Next.js", "Tailwind", "SEO"],
+    description: "TecnicarApp es una aplicación web para registrar y visualizar los tiempos de las carreras del evento Tecnicar 2022, con panel de gestión para jueces y vista pública para espectadores.",
+    tags: ["Node.js", "Svelte", "MySQL", "Vercel"],
     categories: ["web"],
-    media: "/projects/landing.jpg",
-    demo: "https://tusitio.com/landing",
-    repo: "https://github.com/TU-USUARIO/landing",
+    media: "Tecnicar.jpg",
+    demo: "http://tecnicar.mec.gob.ar/",
+    repo: "https://github.com/cuencadelplata/cronometraje-carrera-integrador-2022",
+    doc:  "https://docs.google.com/document/d/1ULqGBsSmMd0L-r_utbjpnS5Caio5apPvOnfAe_5iveI/edit?usp=sharing",
+    content: "https://www.youtube.com/watch?v=psZDonPfHK0",  
   },
     {
     title: "Landing Psicologa",
@@ -113,31 +115,13 @@ const projects: Project[] = [
   },
     {
     title: "QA Automation - InboxVip",
-    description: "Landing estática Next.js + Tailwind optimizada con Lighthouse 95+.",
-    tags: ["Next.js", "Tailwind", "SEO"],
-    categories: ["web"],
-    media: "/projects/landing.jpg",
-    demo: "https://tusitio.com/landing",
-    repo: "https://github.com/TU-USUARIO/landing",
-  },
-    {
-    title: "Sistema Estación de servicio",
-    description: "Landing estática Next.js + Tailwind optimizada con Lighthouse 95+.",
-    tags: ["Next.js", "Tailwind", "SEO"],
-    categories: ["web"],
-    media: "/projects/landing.jpg",
-    demo: "https://tusitio.com/landing",
-    repo: "https://github.com/TU-USUARIO/landing",
-  },
-    {
-    title: "Este Portfolio",
-    description: "Landing estática Next.js + Tailwind optimizada con Lighthouse 95+.",
-    tags: ["Next.js", "Tailwind", "SEO"],
-    categories: ["web"],
-    media: "/projects/landing.jpg",
-    demo: "https://tusitio.com/landing",
-    repo: "https://github.com/TU-USUARIO/landing",
-  },
+    description: "Automatización de pruebas funcionales para una plataforma social, abarcando flujos web y mobile.",
+    tags: ["Selenium", "Maven", "TestNg", "Chromium", "Appium"],
+    categories: ["QA"],
+    media: "inboxvip.jpg",
+    repo: "https://github.com/12juam12/automation-osos",
+    doc:  "https://docs.google.com/spreadsheets/d/19Dz0sYT0QhLjUToQ-qJFCzuTnnoug3YkcQfYyWJDr3Q/edit?usp=sharing",
+  }
 ];
 
 const experience = [
@@ -359,6 +343,7 @@ export default function Portfolio() {
       { key: "mobile", label: "Mobile" },
       { key: "tv", label: "TV" },
       { key: "ai", label: "AI / Machine Learning" },
+      { key: "QA", label: "QA / Testing" },
     ].map((f) => (
       <button
         key={f.key}
@@ -477,6 +462,18 @@ export default function Portfolio() {
                              bg-emerald-600 text-white hover:bg-emerald-700"
                 >
                   <FileText className="h-4 w-4" /> Documento
+                </a>
+              )}
+              {p.content && (
+                <a
+                  href={p.content}
+                  target="_blank"
+                  rel="noreferrer"
+                  className="inline-flex items-center gap-2 text-sm px-3.5 py-2 rounded-full
+                  bg-red-600 text-white shadow-sm ring-1 ring-red-600/20
+                  hover:bg-red-700 hover:shadow transition"
+                >
+                  <PlayCircle className="h-4 w-4" /> Contenido
                 </a>
               )}
             </div>
