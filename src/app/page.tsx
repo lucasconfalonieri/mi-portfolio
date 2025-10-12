@@ -124,27 +124,82 @@ const projects: Project[] = [
   }
 ];
 
-const experience = [
+type ExperienceItem = {
+  role: string;
+  company: string;
+  period: string;
+  location: string;
+  mode?: "Remoto" | "Híbrido" | "Presencial" | "Part-time" | "Full-time";
+  bullets: string[];
+  platforms?: string[];
+  tools?: string[];
+  logo?: string;
+};
+
+const experience: ExperienceItem[] = [
   {
-    role: "Desarrollador Full‑Stack (Pasantía)",
-    company: "EMPRESA/INSTITUCIÓN",
-    period: "03/2024 – 12/2024",
+    logo: "glitch.jpg",
+    role: "Software Development Engineer in Test",
+    company: "GlitchCode",
+    period: "mar. 2023 – sep.2025",
+    location: "Argentina",
+    mode: "Part-time",
     bullets: [
-      "Diseñé e implementé editor de presentaciones con React y Tailwind.",
-      "Integré autenticación (Supabase) y despliegue en Vercel/AWS.",
-      "Mejoré tiempos de build y DX (CI/CD, linting, PR templates).",
+      "Diseño, desarrollo y ejecución de pruebas automatizadas end-to-end.",
+      "Pruebas de rendimiento y pruebas automatizadas de APIs (REST/SOAP).",
+      "Configuración de pipelines de CI para suites de regresión.",
+      "Diseño y ejecución de casos de prueba, análisis de riesgos y reporte de bugs.",
+      "Elaboración de reportes de resultados y cobertura."
     ],
+    platforms: ["Web", "REST/SOAP", "Mobile"],
+    tools: ["TestNG", "Appium", "Selenium", "Maven", "Git"]
   },
   {
-    role: "Ayudante/Docente — API REST",
-    company: "UNNE — Ingeniería en Sistemas",
-    period: "2025",
+    logo: "nea.jpg",
+    role: "Software Development — Área I+D",
+    company: "Desarrollos NEA",
+    period: "jun. 2024 – ene. 2025",
+    location: "Corrientes, Argentina",
+    mode: "Híbrido",
     bullets: [
-      "Planifiqué clase práctica con CRUD en Node/Express.",
-      "Guié a estudiantes en pruebas de endpoints (GET/POST/PUT/DELETE).",
+      "Desarrollo y mantenimiento de aplicaciones web con React y Node.js.",
+      "Desarrollo para Tizen OS en TVs: detección de dispositivos y despliegue.",
+      "Diseño, creación y administración de bases de datos SQL.",
+      "Desarrollo e integración de APIs; UI con Tailwind CSS.",
+      "CI/CD y research de nuevas tecnologías; generación de reportes técnicos."
     ],
+    platforms: ["Web", "REST APIs", "Tizen OS"],
+    tools: ["React", "Node.js", "Tailwind CSS", "SQL", "Git", "Teams", "Tizen Studio"]
+  },
+  {
+    role: "Software Developer — Proyectos Freelance",
+    company: "Varios clientes",
+    period: "2022 – actualidad",
+    location: "Remoto",
+    bullets: [
+      "Mantina (React/Node/MySQL) — plataforma de distribución de material.",
+      "NeuroNEA (Next.js/Prisma/PostgreSQL/Supabase) — app web para rehabilitación neurológica.",
+      "Audiestímulos (Svelte/Node/MySQL) — app web para rehabilitación auditiva.",
+      "Landing psicologa"
+    ],
+    platforms: ["Web", "Mobile"],
+    tools: ["TypeScript", "React", "Node.js", "MySQL", "Supabase", "Svelte", "Prisma"]
+  },
+  {
+    logo: "sierra.jpg", 
+    role: "F&B Staff (Work & Travel)",
+    company: "Sierra-at-Tahoe Resort",
+    period: "(dic. 2023 – mar. 2024)-(dic. 2024 – mar. 2025)",
+    location: "Twin Bridges, California, USA",
+    mode: "Presencial",
+    bullets: [
+      "Inglés profesional.",
+      "Compañeros internacionales.",
+      "Contacto con clientes en entorno de alto flujo y trabajo en equipo.",
+    ]
   },
 ];
+
 
 const skillIcons = [
   { label: "AWS", Icon: FaAws },
@@ -486,26 +541,73 @@ export default function Portfolio() {
 
 
 
-      <Section id="experiences" title="Experiences" variant="b">
-        <div className="space-y-4">
-          {experience.map((e) => (
-            <div key={e.role} className="rounded-2xl border bg-white p-6 shadow-sm">
-              <div className="flex items-start justify-between gap-4">
-                <div>
-                  <h3 className="text-lg font-semibold flex items-center gap-2"><Briefcase className="h-5 w-5" /> {e.role}</h3>
-                  <p className="text-slate-600">{e.company}</p>
-                </div>
-                <span className="text-sm text-slate-500 whitespace-nowrap">{e.period}</span>
+{/* EXPERIENCES */}
+<Section id="experiences" title="Experiences" variant="b">
+  <div className="space-y-4">
+    {experience.map((e) => (
+      <div key={`${e.company}-${e.role}`} className="rounded-2xl border bg-white p-6 shadow-sm">
+        <div className="flex items-start justify-between gap-4">
+          <div>
+          <div className="flex items-start gap-3">
+          {/* Logo de la empresa */}
+          <div className="shrink-0">
+            {e.logo ? (
+              <img
+                src={e.logo}
+                alt={e.company}
+                className="h-10 w-10 rounded-md object-contain border bg-white"
+                loading="lazy"
+              />
+            ) : (
+              <div className="h-10 w-10 rounded-md border bg-slate-50 flex items-center justify-center text-slate-400">
+                <Briefcase className="h-5 w-5" />
               </div>
-              <ul className="mt-3 list-disc list-inside text-slate-700 space-y-1">
-                {e.bullets.map((b, i) => (
-                  <li key={i}>{b}</li>
-                ))}
-              </ul>
-            </div>
-          ))}
+            )}
+          </div>
+          <div>
+            <h3 className="text-lg font-semibold">{e.role}</h3>
+            <p className="text-slate-600">{e.company}</p>
+          </div>
         </div>
-      </Section>
+
+            <p className="mt-1 text-sm text-slate-500 flex items-center gap-2">
+              <MapPin className="h-4 w-4" />
+              {e.location} {e.mode ? `· ${e.mode}` : ""}
+            </p>
+          </div>
+          <span className="text-sm text-slate-500 whitespace-nowrap">{e.period}</span>
+        </div>
+
+        {e.platforms?.length ? (
+          <div className="mt-3 flex flex-wrap gap-2">
+            {e.platforms.map((p) => (
+              <span key={p} className="text-[11px] rounded-full border px-2 py-1 text-slate-700">
+                {p}
+              </span>
+            ))}
+          </div>
+        ) : null}
+
+        <ul className="mt-3 list-disc list-inside text-slate-700 space-y-1">
+          {e.bullets.map((b, i) => (
+            <li key={i}>{b}</li>
+          ))}
+        </ul>
+
+        {e.tools?.length ? (
+          <div className="mt-3 flex flex-wrap gap-2">
+            {e.tools.map((t) => (
+              <span key={t} className="text-[11px] rounded-full border px-2 py-1 text-slate-700">
+                {t}
+              </span>
+            ))}
+          </div>
+        ) : null}
+      </div>
+    ))}
+  </div>
+</Section>
+
 
       <Section id="education" title="Education" variant="a">
         <div className="rounded-2xl border bg-white p-6 shadow-sm">
