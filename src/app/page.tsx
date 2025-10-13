@@ -189,11 +189,19 @@ function useLang() {
   useEffect(() => {
     if (typeof window !== "undefined") localStorage.setItem("lang", lang);
   }, [lang]);
-  return { lang, setLang, t: <T extends keyof (typeof i18n)["es"]>(path: string): any => {
-    const parts = path.split(".");
-    // @ts-expect-error simple path resolver
-    return parts.reduce((acc, p) => acc?.[p], i18n[lang]);
-  }};
+return {
+  lang,
+  setLang,
+  t: (path: string): string => {
+    const val = path.split(".").reduce<unknown>((acc, key) => {
+      if (acc && typeof acc === "object" && key in (acc as Record<string, unknown>)) {
+        return (acc as Record<string, unknown>)[key];
+      }
+      return undefined;
+    }, i18n[lang] as unknown);
+    return typeof val === "string" ? val : path;
+  },
+};
 }
 
 type Category = "web" | "mobile" | "tv" | "ai" | "QA";
@@ -834,9 +842,10 @@ export default function Portfolio() {
       : projects.filter((p) => p.categories.includes(activeFilter))
     ).map((p) => {
       const isVideo = /\.mp4$|\.webm$/i.test(p.media);
+      const titleStr = typeof p.title === "string" ? p.title : p.title[lang];
       return (
         <motion.article
-          key={p.title}
+          key={titleStr}
           initial={{ opacity: 0, y: 12 }}
           whileInView={{ opacity: 1, y: 0 }}
           viewport={{ once: true }}
@@ -857,7 +866,7 @@ export default function Portfolio() {
             ) : (
               <img
                 src={p.media}
-                alt={p.title}
+                alt={titleStr}
                 className="h-full w-full object-cover transition-transform duration-300 group-hover:scale-105"
                 loading="lazy"
               />
