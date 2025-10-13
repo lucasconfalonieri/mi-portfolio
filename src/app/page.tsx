@@ -17,13 +17,22 @@ import {
   Briefcase,
   Code2,
   GraduationCap,
-  Phone,
-  Award,
   FileText,
   PlayCircle,
 } from "lucide-react";
 
 type Category = "web" | "mobile" | "tv" | "ai" | "QA";
+
+type Filter = "all" | Category;
+
+const FILTERS: { key: Filter; label: string }[] = [
+  { key: "all", label: "All" },
+  { key: "web", label: "Web" },
+  { key: "mobile", label: "Mobile" },
+  { key: "tv", label: "TV" },
+  { key: "ai", label: "AI / Machine Learning" },
+  { key: "QA", label: "QA / Testing" },
+];
 
 type Project = {
   title: string;
@@ -298,8 +307,8 @@ export default function Portfolio() {
 
   const { scrollY } = useScroll();
   const yBg = useTransform(scrollY, [0, 600], [0, 120]);
-  const [activeFilter, setActiveFilter] =
-  useState<"all" | Category>("all");
+  const [activeFilter, setActiveFilter] = useState<Filter>("all");
+
 
   const [certPreview, setCertPreview] = useState<CertificateItem | null>(null);
 
@@ -437,19 +446,11 @@ export default function Portfolio() {
 
 
 <Section id="projects" title="Projects" variant="a">
-  {/* Tabs */}
   <div className="mb-6 flex flex-wrap gap-2">
-    {[
-      { key: "all", label: "All" },
-      { key: "web", label: "Web" },
-      { key: "mobile", label: "Mobile" },
-      { key: "tv", label: "TV" },
-      { key: "ai", label: "AI / Machine Learning" },
-      { key: "QA", label: "QA / Testing" },
-    ].map((f) => (
+    {FILTERS.map((f) => (
       <button
         key={f.key}
-        onClick={() => setActiveFilter(f.key as any)}
+        onClick={() => setActiveFilter(f.key)}
         className={`px-4 py-2 rounded-full border text-sm transition
           ${activeFilter === f.key
             ? "bg-slate-900 text-white border-slate-900"
@@ -459,6 +460,7 @@ export default function Portfolio() {
       </button>
     ))}
   </div>
+
 
   {/* Grid */}
   <div className="grid gap-6 sm:grid-cols-2 lg:grid-cols-3">
