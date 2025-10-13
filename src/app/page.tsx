@@ -164,9 +164,8 @@ const experience: ExperienceItem[] = [
     bullets: [
       "Desarrollo y mantenimiento de aplicaciones web con React y Node.js.",
       "Desarrollo para Tizen OS en TVs: detección de dispositivos y despliegue.",
-      "Diseño, creación y administración de bases de datos SQL.",
-      "Desarrollo e integración de APIs; UI con Tailwind CSS.",
-      "CI/CD y research de nuevas tecnologías; generación de reportes técnicos."
+      "Desarrollo e integración de API; UI con Tailwind CSS.",
+      "Research de nuevas tecnologías; generación de reportes técnicos."
     ],
     platforms: ["Web", "REST APIs", "Tizen OS"],
     tools: ["React", "Node.js", "Tailwind CSS", "SQL", "Git", "Teams", "Tizen Studio"]
@@ -200,6 +199,30 @@ const experience: ExperienceItem[] = [
   },
 ];
 
+type EducationItem = {
+  degree: string;
+  institution: string;
+  period: string;
+  location?: string;
+  logo?: string;        // ej: "/logos/ucp.png" (poné el archivo en public/logos/)
+  institutionUrl?: string;
+  bullets?: string[];
+};
+
+const educationItems: EducationItem[] = [
+  {
+    degree: "Ingeniería en Sistemas de Información",
+    institution: "Universidad de la Cuenca del Plata (UCP)",
+    period: "2020 – 2024",
+    location: "Corrientes, Argentina",
+    logo: "cuenca.png",
+    institutionUrl: "https://www.ucp.edu.ar/",
+    bullets: [
+      "Carrera de grado (5 años).",
+      "Formación en ingeniería de software, gestión de proyectos, bases de datos, redes y sistemas operativos.",
+    ],
+  },
+];
 
 const skillIcons = [
   { label: "AWS", Icon: FaAws },
@@ -216,20 +239,36 @@ const skillIcons = [
   { label: "TensorFlow", Icon: SiTensorflow },
 ];
 
-const certificates = [
+type CertificateItem = {
+  title: string;
+  issuer: string;
+  date?: string;
+  file: string;           // ruta en /public/certificates/*
+  type: "image" | "pdf";
+  thumbnail?: string;     // opcional: miniatura para PDF (jpg/png)
+  credentialUrl?: string; // opcional: link a credly, etc.
+};
+
+const certificates: CertificateItem[] = [
   {
-    title: "AWS Cloud Practitioner (ejemplo)",
-    issuer: "Amazon Web Services",
-    year: "2025",
-    link: "https://tusitio.com/certificado/aws",
+    title: "Ingeniería en Sistemas de Información",
+    issuer: "Universidad de la Cuenca del Plata (UCP)",
+    date: "2024",
+    file: "degree.jpeg",
+    type: "image",
+    credentialUrl: "https://registrograduados.siu.edu.ar/consulta.php?ah=st68ec56337dbb79.61600392&ai=registro_dngu%7C%7C92000001&tcm=popup&cGFyYW1ldHJv=eyJpZF90cmFtaXRlIjoiMTc2MzQ5MiIsInNpc3RlbWEiOiJzaWRjZXIiLCJpZF90aXBvX2RvY3VtZW50byI6IkROSSIsImRvY3VtZW50byI6IjQzNzUyMDAyIiwidGlwb195X2RvY3VtZW50byI6IkRvY3VtZW50byBOYWNpb25hbCBkZSBJZGVudGlkYWQgNDM3NTIwMDIiLCJmZWNoYV9lZ3Jlc28iOiIyMDI0LTEyLTIwIiwibm9tYnJlX2FwZWxsaWRvIjoiQ09ORkFMT05JRVJJLCBMVUNBUyBFRFVBUkRPIiwiYXBlbGxpZG8iOiJDT05GQUxPTklFUkkiLCJub21icmUiOiJMVUNBUyBFRFVBUkRPIiwibmFjaW9uYWxpZGFkIjoiQVJHRU5USU5BIiwiaW5zdGl0dWNpb24iOiJVbml2ZXJzaWRhZCBkZSBsYSBDdWVuY2EgZGVsIFBsYXRhIiwidGl0dWxvIjoiSW5nZW5pZXJvXC9hIGVuIFNpc3RlbWFzIGRlIEluZm9ybWFjaVx1MDBmM24iLCJibG9ja2NoYWluIjoiYmxvY2tjaGFpbl9sb2dvX25lZ3JvLnBuZyJ9&tm=1",
   },
   {
-    title: "Google Data Analytics (ejemplo)",
-    issuer: "Coursera / Google",
-    year: "2024",
-    link: "https://tusitio.com/certificado/google-da",
+    title: "AWS Academy Graduate - AWS Academy Cloud Foundations",
+    issuer: "AWS Academy",
+    date: "2024-06",
+    file: "aws-foundations.pdf",
+    type: "pdf",
+    thumbnail: "/aws.jpeg",
+    credentialUrl: "https://www.credly.com/go/j7MXVoYG",
   },
 ];
+
 
 type SectionProps = { id: string; title?: string; children: React.ReactNode; variant?: 'a' | 'b'; hideTitle?: boolean };
 const Section = ({ id, title, children, variant = 'a', hideTitle = false }: SectionProps) => (
@@ -261,6 +300,14 @@ export default function Portfolio() {
   const yBg = useTransform(scrollY, [0, 600], [0, 120]);
   const [activeFilter, setActiveFilter] =
   useState<"all" | Category>("all");
+
+  const [certPreview, setCertPreview] = useState<CertificateItem | null>(null);
+
+  useEffect(() => {
+    const onEsc = (e: KeyboardEvent) => e.key === "Escape" && setCertPreview(null);
+    window.addEventListener("keydown", onEsc);
+    return () => window.removeEventListener("keydown", onEsc);
+  }, []);
 
 
   return (
@@ -324,7 +371,7 @@ export default function Portfolio() {
                 <h1 className="text-3xl sm:text-4xl md:text-5xl font-bold leading-tight mt-2 text-white">
                   Lucas Confalonieri
                 </h1>
-                <p className="mt-2 text-lg text-white/90">Full-Stack Engineer · Testing & BDD</p>
+                <p className="mt-2 text-lg text-white/90">Full-Stack Engineer · Testing & DB</p>
                 <div className="mt-6 flex flex-wrap gap-3">
                   <a href="#projects" className="inline-flex items-center gap-2 rounded-2xl border border-white/70 text-white px-4 py-2 bg-white/5 hover:bg-white/10">
                     <Code2 className="h-4 w-4" /> Ver proyectos
@@ -346,7 +393,7 @@ export default function Portfolio() {
       <Section id="about" hideTitle variant="a">
         <div className="rounded-xl border bg-white p-6 md:p-12 shadow-sm">
           <h2 className="text-3xl sm:text-4xl md:text-[28px] font-bold tracking-tight">
-            Hola, soy <span className="underline decoration-emerald-300 decoration-4 underline-offset-4">Lucas Confalonieri</span>
+            Hola Mundo! soy <span className="underline decoration-emerald-300 decoration-4 underline-offset-4">Lucas Confalonieri</span>
           </h2>
           <p className="mt-5 text-lg md:text-[16px] text-slate-700 max-w-3xl">
             <strong>Ingeniero en Sistemas de Información </strong> con +3 años participando en proyectos con clientes reales y experiencia laboral en desarrollo y testing de software.
@@ -609,40 +656,250 @@ export default function Portfolio() {
 </Section>
 
 
-      <Section id="education" title="Education" variant="a">
-        <div className="rounded-2xl border bg-white p-6 shadow-sm">
-          <h3 className="text-lg font-semibold flex items-center gap-2"><GraduationCap className="h-5 w-5" /> Ingeniería en Sistemas de Información</h3>
-          <p className="text-slate-600 mt-1">Universidad Nacional del Nordeste (UNNE) — 5º año</p>
-          <p className="text-slate-600">Intereses: IA aplicada, DevOps, visualización y productos web/mobile escalables.</p>
-        </div>
-      </Section>
+{/* EDUCATION */}
+<Section id="education" title="Education" variant="a">
+  <div className="space-y-4">
+    {educationItems.map((ed) => (
+      <div key={ed.institution} className="rounded-2xl border bg-white p-6 shadow-sm">
+        <div className="flex items-start justify-between gap-4">
+          <div className="flex items-start gap-3">
+            {/* Logo universidad */}
+            <div className="shrink-0">
+              {ed.logo ? (
+                <img
+                  src={ed.logo}
+                  alt={ed.institution}
+                  className="h-10 w-10 rounded-md object-contain border bg-white"
+                  loading="lazy"
+                />
+              ) : (
+                <div className="h-10 w-10 rounded-md border bg-slate-50 flex items-center justify-center text-slate-400">
+                  <GraduationCap className="h-5 w-5" />
+                </div>
+              )}
+            </div>
 
-      <Section id="certificates" title="Certificates" variant="b">
-        <div className="grid sm:grid-cols-2 gap-4">
-          {certificates.map((c) => (
-            <div key={c.title} className="rounded-2xl border bg-white p-5 shadow-sm flex items-start justify-between gap-4">
-              <div>
-                <h4 className="font-semibold flex items-center gap-2"><Award className="h-5 w-5" /> {c.title}</h4>
-                <p className="text-slate-600">{c.issuer}</p>
-              </div>
-              <div className="text-sm text-slate-500 text-right">
-                <div>{c.year}</div>
-                <a className="underline" href={c.link} target="_blank" rel="noreferrer">Credential</a>
+            {/* Texto */}
+            <div>
+              <h3 className="text-lg font-semibold">{ed.degree}</h3>
+              {ed.institutionUrl ? (
+                <a
+                  href={ed.institutionUrl}
+                  target="_blank"
+                  rel="noreferrer"
+                  className="text-blue-500 hover:underline"
+                >
+                  {ed.institution}
+                </a>
+              ) : (
+                <p className="text-slate-600">{ed.institution}</p>
+              )}
+              {ed.location && (
+                <p className="mt-1 text-sm text-slate-500 flex items-center gap-2">
+                  <MapPin className="h-4 w-4" /> {ed.location}
+                </p>
+              )}
+            </div>
+          </div>
+
+          <span className="text-sm text-slate-500 whitespace-nowrap">{ed.period}</span>
+        </div>
+
+        {ed.bullets?.length ? (
+          <ul className="mt-3 list-disc list-inside text-slate-700 space-y-1">
+            {ed.bullets.map((b, i) => (
+              <li key={i}>{b}</li>
+            ))}
+          </ul>
+        ) : null}
+      </div>
+    ))}
+  </div>
+</Section>
+
+
+    {/* CERTIFICATES */}
+    <Section id="certificates" title="Certificates" variant="b">
+      <div className="grid md:grid-cols-2 gap-6">
+        {certificates.map((c) => (
+          <article key={c.title} className="rounded-2xl border bg-white shadow-sm overflow-hidden">
+            {/* Preview grande clickeable */}
+            <button
+              type="button"
+              onClick={() => setCertPreview(c)}
+              className="group relative aspect-[16/11] w-full bg-slate-50 overflow-hidden cursor-zoom-in"
+              aria-label={`Abrir ${c.title}`}
+            >
+              <img
+                src={c.type === "image" ? c.file : (c.thumbnail ?? c.file)}
+                alt={c.title}
+                className="h-full w-full object-contain transition-transform duration-300 ease-out
+                          group-hover:scale-105 group-active:scale-[.98]"
+                loading="lazy"
+              />
+              {/* Badge del emisor */}
+              <span className="absolute left-3 top-3 text-[11px] font-medium rounded-full px-2.5 py-1 bg-black/70 text-white uppercase tracking-wide">
+                {c.issuer}
+              </span>
+            </button>
+
+            {/* Info + botones */}
+            <div className="p-5">
+              <h3 className="text-base font-semibold">{c.title}</h3>
+              {c.date && <p className="mt-1 text-sm text-slate-600">{c.date}</p>}
+
+              <div className="mt-4 flex flex-wrap gap-3">
+                <a
+                  href={c.file}
+                  target="_blank"
+                  rel="noreferrer"
+                  className="inline-flex items-center gap-1 text-sm px-3 py-2 rounded-xl
+                            bg-indigo-600 text-white hover:bg-indigo-700"
+                >
+                  Ver
+                </a>
+                {c.credentialUrl && (
+                  <a
+                    href={c.credentialUrl}
+                    target="_blank"
+                    rel="noreferrer"
+                    className="inline-flex items-center gap-1 text-sm px-3 py-2 rounded-xl
+                              bg-emerald-600 text-white hover:bg-emerald-700"
+                  >
+                    Credencial
+                  </a>
+                )}
               </div>
             </div>
-          ))}
-        </div>
-      </Section>
+          </article>
+        ))}
+      </div>
+    </Section>
 
-      <Section id="contact" title="Contact" variant="a">
-        <div className="rounded-2xl border bg-white p-6 shadow-sm">
-          <p className="text-slate-700">¿Querés charlar sobre un proyecto, oportunidad o colaboración? Escribime:</p>
-          <div className="mt-4 flex flex-wrap items-center gap-3">
-            <a href="mailto:TU-EMAIL" className="inline-flex items-center gap-2 rounded-2xl bg-slate-900 text-white px-4 py-2 hover:opacity-95"><Mail className="h-4 w-4" /> Enviar email</a>
-            <a href="https://www.linkedin.com/in/TU-USUARIO" target="_blank" rel="noreferrer" className="inline-flex items-center gap-2 rounded-2xl border px-4 py-2 hover:bg-slate-50"><Linkedin className="h-4 w-4" /> LinkedIn</a>
+    {certPreview && (
+      <div
+        className="fixed inset-0 z-[60] bg-black/70 backdrop-blur-sm flex items-center justify-center p-4"
+        onClick={() => setCertPreview(null)}
+        role="dialog"
+        aria-modal="true"
+      >
+        <div
+          className="relative max-w-5xl w-full"
+          onClick={(e) => e.stopPropagation()} // evitar cierre al click dentro
+        >
+          <button
+            onClick={() => setCertPreview(null)}
+            className="absolute -top-3 -right-3 rounded-full bg-white text-slate-900 w-9 h-9 shadow
+                      hover:opacity-90"
+            aria-label="Cerrar"
+          >
+            ×
+          </button>
+          <img
+            src={certPreview.type === "image" ? certPreview.file : (certPreview.thumbnail ?? certPreview.file)}
+            alt={certPreview.title}
+            className="w-full max-h-[80vh] object-contain rounded-lg bg-white"
+          />
+          <div className="mt-3 text-center text-sm text-white/90">
+            {certPreview.title} — {certPreview.issuer}
           </div>
         </div>
-      </Section>
+      </div>
+    )}
+ 
+
+{/* CONTACT */}
+<Section id="contact" title="Contact" variant="a">
+  <div className="text-center max-w-3xl mx-auto">
+    <h3 className="text-3xl font-extrabold tracking-tight text-slate-700">
+      Let’s Work Together
+    </h3>
+    <p className="mt-3 text-slate-600">
+      ¿Tenés un proyecto en mente? Estoy disponible para trabajo freelance y colaboraciones.
+    </p>
+
+    <div className="mt-6 flex flex-wrap items-center justify-center gap-3">
+      {/* Botón Email (mailto con subject/body) */}
+      <a
+        href={`mailto:lucasconfa7.lc@gmail.com?subject=${encodeURIComponent("Consulta - Portfolio")}&body=${encodeURIComponent("Hola Lucas, te escribo desde tu portfolio para...")}`}
+        className="inline-flex items-center gap-2 rounded-2xl px-5 py-2.5
+                   bg-gradient-to-r from-slate-900 to-slate-700 text-white shadow
+                   hover:opacity-95"
+      >
+        <Mail className="h-4 w-4" /> Email me
+      </a>
+
+      {/* Botón LinkedIn */}
+      <a
+        href="https://www.linkedin.com/in/lucas-confalonieri/"
+        target="_blank"
+        rel="noreferrer"
+        className="inline-flex items-center gap-2 rounded-2xl px-5 py-2.5
+                   border border-slate-300 text-slate-800 hover:bg-slate-50"
+      >
+        <Linkedin className="h-4 w-4" /> Connect on LinkedIn
+      </a>
+    </div>
+  </div>
+
+  {/* Formulario para enviar mensaje (sin backend, usando FormSubmit) */}
+  <form
+    action="https://formsubmit.co/lucasconfa7.lc@gmail.com"
+    method="POST"
+    className="mt-10 max-w-3xl mx-auto rounded-2xl border bg-white p-6 shadow-sm"
+  >
+    <input type="hidden" name="_subject" value="Nuevo mensaje desde el portfolio" />
+    <input type="hidden" name="_captcha" value="false" />
+
+    <div className="grid sm:grid-cols-2 gap-4">
+      <div>
+        <label className="block text-sm font-medium text-slate-700">Nombre</label>
+        <input
+          name="name"
+          required
+          className="mt-1 w-full rounded-xl border border-slate-300 px-3 py-2
+                     focus:outline-none focus:ring-2 focus:ring-emerald-500"
+          placeholder="Tu nombre"
+        />
+      </div>
+      <div>
+        <label className="block text-sm font-medium text-slate-700">Email</label>
+        <input
+          type="email"
+          name="email"
+          required
+          className="mt-1 w-full rounded-xl border border-slate-300 px-3 py-2
+                     focus:outline-none focus:ring-2 focus:ring-emerald-500"
+          placeholder="tu@correo.com"
+        />
+      </div>
+    </div>
+
+    <div className="mt-4">
+      <label className="block text-sm font-medium text-slate-700">Mensaje</label>
+      <textarea
+        name="message"
+        required
+        rows={5}
+        className="mt-1 w-full rounded-xl border border-slate-300 px-3 py-2
+                   focus:outline-none focus:ring-2 focus:ring-emerald-500"
+        placeholder="Contame brevemente sobre tu proyecto o consulta…"
+      />
+    </div>
+
+    <div className="mt-5 flex items-center justify-between">
+      <button
+        type="submit"
+        className="inline-flex items-center gap-2 rounded-2xl px-5 py-2.5
+                   bg-gradient-to-r from-slate-900 to-slate-700 text-white shadow
+                   hover:opacity-95"
+      >
+        Enviar mensaje
+      </button>
+    </div>
+  </form>
+</Section>
+
 
       <footer className="py-10 text-center text-sm text-slate-500">© {new Date().getFullYear()} Lucas Confalonieri — Portfolio</footer>
     </div>
