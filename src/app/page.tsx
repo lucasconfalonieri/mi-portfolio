@@ -658,7 +658,7 @@ export default function Portfolio() {
             : "bg-transparent"
         }`}
       >
-        <div className="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8 h-16 flex items-center justify-between">
+        <div className="max-w-6xl mx-auto pl-2 pr-4 sm:pl-4 sm:pr-6 lg:pl-6 lg:pr-8 h-16 flex items-center justify-between">
           <a href="#home" className={`font-semibold tracking-tight ${headerText}`}>LUCAS CONFALONIERI</a>
         <nav className={`hidden sm:flex gap-5 text-sm ${headerText}`}>
           <a href="#home" className="hover:underline">{t("nav.home")}</a>
@@ -962,75 +962,97 @@ export default function Portfolio() {
   </div>
 </Section>
 
-
-
 {/* EXPERIENCES */}
 <Section id="experiences" title={t("experiences.title")} variant="b">
   <div className="space-y-4">
-    {experience.map((e) => (
-      <div key={`${e.company}-${e.role}`} className="rounded-2xl border bg-white p-6 shadow-sm">
-        <div className="flex items-start justify-between gap-4">
-          <div>
-          <div className="flex items-start gap-3">
-          {/* Logo de la empresa */}
-          <div className="shrink-0">
-            {e.logo ? (
-              <img
-                src={e.logo}
-                alt={e.company}
-                className="h-10 w-10 rounded-md object-contain border bg-white"
-                loading="lazy"
-              />
-            ) : (
-              <div className="h-10 w-10 rounded-md border bg-slate-50 flex items-center justify-center text-slate-400">
-                <Briefcase className="h-5 w-5" />
+    {experience.map((e) => {
+      // Normalizo los periodos para que puedan venir como string con "·" o como array
+      const periods =
+        Array.isArray(e.period[lang])
+          ? (e.period[lang] as string[])
+          : String(e.period[lang]).split("·").map((s) => s.trim()).filter(Boolean);
+
+      return (
+        <div
+          key={`${e.company}-${e.role[lang]}`}
+          className="rounded-2xl border bg-white p-6 shadow-sm"
+        >
+          {/* Encabezado: logo + rol/empresa + periodos con wrap */}
+          <div className="flex flex-col sm:flex-row sm:items-start sm:justify-between gap-2">
+            {/* Izquierda */}
+            <div className="flex items-start gap-3">
+              <div className="shrink-0">
+                {e.logo ? (
+                  <img
+                    src={e.logo}
+                    alt={e.company}
+                    className="h-10 w-10 rounded-md object-contain border bg-white"
+                    loading="lazy"
+                  />
+                ) : (
+                  <div className="h-10 w-10 rounded-md border bg-slate-50 flex items-center justify-center text-slate-400">
+                    <Briefcase className="h-5 w-5" />
+                  </div>
+                )}
               </div>
-            )}
-          </div>
-          <div>
-            <h3 className="text-lg font-semibold">{e.role[lang]}</h3>
-            <p className="text-slate-600">{e.company}</p>
-          </div>
-        </div>
 
-            <p className="mt-1 text-sm text-slate-500 flex items-center gap-2">
-              <MapPin className="h-4 w-4" />
-              {e.location} {e.mode ? `· ${MODE_LABEL[lang][e.mode]}` : ""}
-            </p>
-          </div>
-          <span className="text-sm text-slate-500 whitespace-nowrap">{e.period[lang]}</span>
-        </div>
+              <div>
+                <h3 className="text-lg font-semibold">{e.role[lang]}</h3>
+                <p className="text-slate-600">{e.company}</p>
 
-        {e.platforms?.length ? (
-          <div className="mt-3 flex flex-wrap gap-2">
-            {e.platforms.map((p) => (
-              <span key={p} className="text-[11px] rounded-full border px-2 py-1 text-slate-700">
-                {p}
-              </span>
+                {/* Ubicación y modalidad (debajo del título en mobile) */}
+                <p className="mt-1 text-sm text-slate-500 flex items-center gap-2">
+                  <MapPin className="h-4 w-4" />
+                  {e.location} {e.mode ? `· ${MODE_LABEL[lang][e.mode]}` : ""}
+                </p>
+              </div>
+            </div>
+
+            {/* Derecha: periodos con posibilidad de wrap en mobile */}
+            <div className="sm:text-right">
+              <div className="flex flex-wrap gap-x-2 gap-y-1 text-xs text-slate-500 leading-tight">
+                {periods.map((p, idx) => (
+                  <span key={idx} className="whitespace-nowrap">
+                    {p}
+                  </span>
+                ))}
+              </div>
+            </div>
+          </div>
+
+          {/* Plataformas (chips) */}
+          {e.platforms?.length ? (
+            <div className="mt-3 flex flex-wrap gap-2">
+              {e.platforms.map((p) => (
+                <span key={p} className="text-[11px] rounded-full border px-2 py-1 text-slate-700">
+                  {p}
+                </span>
+              ))}
+            </div>
+          ) : null}
+
+          {/* Bullets traducidos */}
+          <ul className="mt-3 list-disc list-inside text-slate-700 space-y-1">
+            {e.bullets.map((b, i) => (
+              <li key={i}>{b[lang]}</li>
             ))}
-          </div>
-        ) : null}
+          </ul>
 
-        <ul className="mt-3 list-disc list-inside text-slate-700 space-y-1">
-        {e.bullets.map((b, i) => (
-          <li key={i}>{b[lang]}</li>
-        ))}
-        </ul>
-
-        {e.tools?.length ? (
-          <div className="mt-3 flex flex-wrap gap-2">
-            {e.tools.map((t) => (
-              <span key={t} className="text-[11px] rounded-full border px-2 py-1 text-slate-700">
-                {t}
-              </span>
-            ))}
-          </div>
-        ) : null}
-      </div>
-    ))}
+          {/* Herramientas (chips) */}
+          {e.tools?.length ? (
+            <div className="mt-3 flex flex-wrap gap-2">
+              {e.tools.map((t) => (
+                <span key={t} className="text-[11px] rounded-full border px-2 py-1 text-slate-700">
+                  {t}
+                </span>
+              ))}
+            </div>
+          ) : null}
+        </div>
+      );
+    })}
   </div>
 </Section>
-
 
 {/* EDUCATION */}
 <Section id="education" title={t("education.title")} variant="a">
