@@ -2,11 +2,13 @@
 
 import { skillIcons } from "@/constants/skillIcons";
 import Section from "../Section";
+import { useI18n } from "@/i18n";
 
 export default function KnowledgeSection() {
+  const { t } = useI18n();
 
   return (
-    <Section id="knowledge" title="Knowledge" variant="b">  
+    <Section id="knowledge" title={t("knowledge.title")} variant="b">  
     <>
       {/* Si querés que el título lo maneje Section, no pongas nada aquí */}
       <div className="rounded-2xl border bg-white p-6 shadow-sm">

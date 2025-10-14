@@ -5,9 +5,13 @@ import { Code2, Download } from "lucide-react";
 import { useI18n } from "@/i18n";
 
 export default function Hero() {
-  const { t } = useI18n();
+  const { t, lang } = useI18n();
   const { scrollY } = useScroll();
   const yBg = useTransform(scrollY, [0, 600], [0, 120]);
+  const cvHref =
+    lang === "es"
+      ? "/cv/LucasConfalonieri-ES.pdf"
+      : "/cv/LucasConfalonieri-EN.pdf";
 
   return (
     <section id="home" className="relative isolate overflow-hidden min-h-screen flex items-center">
@@ -55,8 +59,10 @@ export default function Hero() {
                   <Code2 className="h-4 w-4" /> {t("hero.viewProjects")}
                 </a>
                 <a
-                  href="/CV_LUCAS_CONFALONIERI.pdf"
+                  href={cvHref}
+                  download={`CV-Lucas-Confalonieri-${(lang || "en").toUpperCase()}.pdf`}
                   className="inline-flex items-center gap-2 rounded-2xl bg-white text-slate-900 px-4 py-2 hover:opacity-95"
+                  aria-label={t("hero.downloadCV")}
                 >
                   <Download className="h-4 w-4" /> {t("hero.downloadCV")}
                 </a>
