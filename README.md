@@ -40,11 +40,3 @@ npm run dev   # http://localhost:3000
 # Build / Start
 npm run build
 npm run start
-
-## Contact
-
-Email: lucasconfa7.lc@gmail.com
-
-LinkedIn: https://www.linkedin.com/in/lucas-confalonieri
-
-GitHub: https://github.com/lucasconfalonieri
