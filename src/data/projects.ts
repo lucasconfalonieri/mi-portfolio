@@ -110,18 +110,18 @@ export const projects: Project[] = [
   },
   {
     title: {
-      es: "Landing Psicóloga",
-      en: "Psychologist Landing Page",
+      es: "Psicóloga MVC — Landing Page",
+      en: "Psychologist MVC - Landing Page",
     },
     description: {
-      es: "Landing estática Next.js + Tailwind optimizada con Lighthouse 95+.",
-      en: "Static landing on Next.js + Tailwind, Lighthouse score 95+.",
+      es: "Landing page moderna y accesible para una psicóloga, con identidad visual propia (paleta, tipografías y logotipo), foco en conversión vía WhatsApp y contenido escaneable (servicios, enfoque, FAQs, testimonios y legales). Diseño responsive, limpio y rápido, optimizado para SEO y performance.",
+      en: "Modern and accessible landing page for a psychologist, with its own visual identity (palette, fonts and logo), focus on conversion via WhatsApp and scannable content (services, approach, frequently asked questions, testimonials and legal). Responsive, clean and fast design, optimized for SEO and performance.",
     },
-    tags: ["Next.js", "Tailwind", "SEO"],
+    tags: ["Next.js", "Tailwind", "TypeScript", "Vercel", "WhatsApp"],
     categories: ["web"],
-    media: "/landing.jpg",
-    demo: "https://tusitio.com/landing",
-    repo: "https://github.com/TU-USUARIO/landing",
+    media: "/landing.gif",
+    demo: "https://psico-mv-confalonieri.vercel.app/",
+    repo: "https://github.com/lucasconfalonieri/landing-psicologa",
   },
   {
     title: {
