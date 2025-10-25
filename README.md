@@ -28,7 +28,7 @@ Personal portfolio built with **Next.js (App Router)**, **TypeScript**, **Tailwi
 
 ```bash
 # Clone
-git clone https://github.com/<your-username>/mi-portfolio.git
+git clone https://github.com/lucasconfalonieri/mi-portfolio.git
 cd mi-portfolio
 
 # Install
