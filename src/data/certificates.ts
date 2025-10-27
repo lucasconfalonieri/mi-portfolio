@@ -18,4 +18,12 @@ export const certificates: CertificateItem[] = [
     thumbnail: "/aws.jpeg",
     credentialUrl: "https://www.credly.com/go/j7MXVoYG",
   },
+    {
+    title: { es: "Advanced SQL & Database Design - AWS Training & Certification", en: "Advanced SQL & Database Design - AWS Training & Certification"},
+    issuer: "AWS Skill Builder",
+    date: "2025-10",
+    file: "aws-SQL.pdf",
+    type: "pdf",
+    thumbnail: "/sql.jpeg",
+  },
 ];
