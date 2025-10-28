@@ -19,17 +19,18 @@ export const projects: Project[] = [
   },
   {
     title: {
-      es: "Digital Signage Tizen",
-      en: "Digital Signage Tizen",
+      es: "Mantina — Plataforma de material de estudio",
+      en: "Mantina — Study material platform",
     },
     description: {
-      es: "Gestión de slideshows para TVs Tizen: detección, playlists, editor, despliegue.",
-      en: "Slideshow management for Tizen TVs: device discovery, playlists, editor, and cloud deployment.",
+      es: "Gestión y distribución de material para alumnos de pilotaje; backoffice para PDFs y usuarios.",
+      en: "Manage and distribute materials for pilot students; admin backoffice for PDFs and users.",
     },
-    tags: [".NET", "React", "Tizen"],
-    categories: ["tv", "web"],
-    media: "/TVCast.gif",
-    doc: "https://docs.google.com/document/d/1k5GNt04K95fv3lc4VgcEB1efevX3CLAQ/edit?usp=sharing&ouid=102317204902453230079&rtpof=true&sd=true",
+    tags: ["React", "Node.js", "MySQL", "cPanel", "VPS Linux (AlmaLinux)"],
+    categories: ["web"],
+    media: "/Mantina.gif",
+    demo: "https://mantina.com",
+    repo: "https://github.com/lucasconfalonieri/Mantina",
   },
   {
     title: {
@@ -49,6 +50,21 @@ export const projects: Project[] = [
   },
   {
     title: {
+      es: "Psicóloga MVC — Landing Page",
+      en: "Psychologist MVC - Landing Page",
+    },
+    description: {
+      es: "Landing page moderna y accesible para una psicóloga, con identidad visual propia (paleta, tipografías y logotipo), foco en conversión vía WhatsApp y contenido escaneable (servicios, enfoque, FAQs, testimonios y legales). Diseño responsive, limpio y rápido, optimizado para SEO y performance.",
+      en: "Modern and accessible landing page for a psychologist, with its own visual identity (palette, fonts and logo), focus on conversion via WhatsApp and scannable content (services, approach, frequently asked questions, testimonials and legal). Responsive, clean and fast design, optimized for SEO and performance.",
+    },
+    tags: ["Next.js", "Tailwind", "TypeScript", "Vercel", "WhatsApp"],
+    categories: ["web"],
+    media: "/landing.gif",
+    demo: "https://psico-mv-confalonieri.vercel.app/",
+    repo: "https://github.com/lucasconfalonieri/landing-psicologa",
+  },
+  {
+    title: {
       es: "Audiestimulos — Rehabilitación auditiva (implantes cocleares)",
       en: "Audiestimulos — Auditory rehabilitation (cochlear implants)",
     },
@@ -65,18 +81,18 @@ export const projects: Project[] = [
   },
   {
     title: {
-      es: "Mantina — Plataforma de material de estudio",
-      en: "Mantina — Study material platform",
+      es: "Digital Signage Tizen",
+      en: "Digital Signage Tizen",
     },
     description: {
-      es: "Gestión y distribución de material para alumnos de pilotaje; backoffice para PDFs y usuarios.",
-      en: "Manage and distribute materials for pilot students; admin backoffice for PDFs and users.",
+      es: "Gestión de slideshows para TVs Tizen: detección, playlists, editor, despliegue.",
+      en: "Slideshow management for Tizen TVs: device discovery, playlists, editor, and cloud deployment.",
     },
-    tags: ["React", "Node.js", "MySQL", "cPanel", "VPS Linux (AlmaLinux)"],
-    categories: ["web"],
-    media: "/Mantina.gif",
-    demo: "https://mantina.com",
-    repo: "https://github.com/lucasconfalonieri/Mantina",
+    tags: [".NET", "React", "Tizen"],
+    categories: ["tv", "web"],
+    media: "/TVCast.gif",
+    demo: "https://castgestion-qa.desarrollosnea.com/",
+    doc: "https://docs.google.com/document/d/1k5GNt04K95fv3lc4VgcEB1efevX3CLAQ/edit?usp=sharing&ouid=102317204902453230079&rtpof=true&sd=true",
   },
   {
     title: {
@@ -107,21 +123,6 @@ export const projects: Project[] = [
     repo: "https://github.com/cuencadelplata/cronometraje-carrera-integrador-2022",
     doc: "https://docs.google.com/document/d/1ULqGBsSmMd0L-r_utbjpnS5Caio5apPvOnfAe_5iveI/edit?usp=sharing",
     content: "https://www.youtube.com/watch?v=psZDonPfHK0",
-  },
-  {
-    title: {
-      es: "Psicóloga MVC — Landing Page",
-      en: "Psychologist MVC - Landing Page",
-    },
-    description: {
-      es: "Landing page moderna y accesible para una psicóloga, con identidad visual propia (paleta, tipografías y logotipo), foco en conversión vía WhatsApp y contenido escaneable (servicios, enfoque, FAQs, testimonios y legales). Diseño responsive, limpio y rápido, optimizado para SEO y performance.",
-      en: "Modern and accessible landing page for a psychologist, with its own visual identity (palette, fonts and logo), focus on conversion via WhatsApp and scannable content (services, approach, frequently asked questions, testimonials and legal). Responsive, clean and fast design, optimized for SEO and performance.",
-    },
-    tags: ["Next.js", "Tailwind", "TypeScript", "Vercel", "WhatsApp"],
-    categories: ["web"],
-    media: "/landing.gif",
-    demo: "https://psico-mv-confalonieri.vercel.app/",
-    repo: "https://github.com/lucasconfalonieri/landing-psicologa",
   },
   {
     title: {
