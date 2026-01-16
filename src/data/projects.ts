@@ -3,8 +3,23 @@ import { Project } from "@/types/content";
 export const projects: Project[] = [
   {
     title: {
-      es: "Mascoteando — Plataforma social para dueños de mascotas",
-      en: "Mascoteando — Social platform for pet owners",
+      es: "Futbolero - Ranking y estadísticas de fútbol entre amigos",
+      en: "Futbolero - Soccer ranking & stats app for friends",
+    },
+    description: {
+      es: "Web app para centralizar y visualizar estadísticas de una liga informal: tabla de posiciones, historial de partidos, head-to-head entre jugadores y perfiles individuales.",
+      en: "Web app to centralize and view informal league stats: standings table, match history, head-to-head comparisons, and individual player profiles.",
+    },
+    tags: ["Next.js", "TypeScript", "Tailwind CSS", "Firebase Auth", "Firestore", "Vercel"],
+    categories: ["web"],
+    media: "/futbolero.gif",
+    demo: "https://futbolero-alfin.vercel.app/",
+    repo: "https://github.com/lucasconfalonieri/fut5-amigos",
+  },
+  {
+    title: {
+      es: "Mascoteando - Plataforma social para dueños de mascotas",
+      en: "Mascoteando - Social platform for pet owners",
     },
     description: {
       es: "App híbrida (Expo) con mapa interactivo, alertas en tiempo real y feed social.",
@@ -19,8 +34,8 @@ export const projects: Project[] = [
   },
   {
     title: {
-      es: "Mantina — Plataforma de material de estudio",
-      en: "Mantina — Study material platform",
+      es: "Mantina - Plataforma de material de estudio",
+      en: "Mantina - Study material platform",
     },
     description: {
       es: "Gestión y distribución de material para alumnos de pilotaje; backoffice para PDFs y usuarios.",
@@ -50,7 +65,7 @@ export const projects: Project[] = [
   },
   {
     title: {
-      es: "Psicóloga MVC — Landing Page",
+      es: "Psicóloga MVC - Landing Page",
       en: "Psychologist MVC - Landing Page",
     },
     description: {
@@ -65,8 +80,8 @@ export const projects: Project[] = [
   },
   {
     title: {
-      es: "Audiestimulos — Rehabilitación auditiva (implantes cocleares)",
-      en: "Audiestimulos — Auditory rehabilitation (cochlear implants)",
+      es: "Audiestimulos - Rehabilitación auditiva (implantes cocleares)",
+      en: "Audiestimulos - Auditory rehabilitation (cochlear implants)",
     },
     description: {
       es: "App web con programa de 5 etapas: imágenes, sonidos y tests de evolución.",
@@ -94,6 +109,7 @@ export const projects: Project[] = [
     demo: "https://castgestion-qa.desarrollosnea.com/",
     doc: "https://docs.google.com/document/d/1k5GNt04K95fv3lc4VgcEB1efevX3CLAQ/edit?usp=sharing&ouid=102317204902453230079&rtpof=true&sd=true",
   },
+  /*
   {
     title: {
       es: "NeuroNEApp",
@@ -107,10 +123,11 @@ export const projects: Project[] = [
     categories: ["web"],
     media: "/NeuroNEA.gif",
   },
+  */
   {
     title: {
-      es: "Tecnicar — Cronometraje de carreras",
-      en: "Tecnicar — Race time tracking",
+      es: "Tecnicar - Cronometraje de carreras",
+      en: "Tecnicar - Race time tracking",
     },
     description: {
       es: "App web para registrar/visualizar tiempos del evento Tecnicar 2022; panel para jueces y vista pública.",
@@ -126,8 +143,8 @@ export const projects: Project[] = [
   },
   {
     title: {
-      es: "QA Automation — InboxVip",
-      en: "QA Automation — InboxVip",
+      es: "QA Automation - InboxVip",
+      en: "QA Automation - InboxVip",
     },
     description: {
       es: "Automatización de pruebas funcionales para una plataforma social, cubriendo flujos web y mobile.",
